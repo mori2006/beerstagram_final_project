@@ -1,0 +1,52 @@
+<div class="page-header">
+  <h3>Beer #<%= @beer.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @beer.name %></dd>
+
+      <dt>Image</dt>
+      <dd><%= @beer.image %></dd>
+
+      <dt>User</dt>
+      <dd><%= @beer.user_id %></dd>
+
+      <dt>Brewed by</dt>
+      <dd><%= @beer.brewed_by %></dd>
+
+      <dt>Style</dt>
+      <dd><%= @beer.style %></dd>
+
+      <dt>Descrip</dt>
+      <dd><%= @beer.descrip %></dd>
+
+      <dt>Abv</dt>
+      <dd><%= @beer.abv %></dd>
+
+      <dt>Db api beer</dt>
+      <dd><%= @beer.db_api_beer_id %></dd>
+
+      <dt>Avail</dt>
+      <dd><%= @beer.avail %></dd>
+
+      <dt>Rating</dt>
+      <dd><%= @beer.rating %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/beers" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/beers/<%= @beer.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_beer/<%= @beer.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

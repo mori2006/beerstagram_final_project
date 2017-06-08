@@ -1,0 +1,154 @@
+<!-- Validation failure messages -->
+<% if @brewery.errors.any? %>
+  <% @brewery.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Brewery #<%= @brewery.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_brewery/<%= @brewery.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <textarea id="name" name="name" placeholder="Name" class="form-control" rows="3"><%= @brewery.name %></textarea>
+      </div>
+
+      <!-- Label and input for image -->
+      <div class="form-group">
+        <label for="image" class="control-label">
+          Image
+        </label>
+
+        <input type="text" id="image" name="image" placeholder="Image" class="form-control" value="<%= @brewery.image %>">
+      </div>
+
+      <!-- Label and input for descrip -->
+      <div class="form-group">
+        <label for="descrip" class="control-label">
+          Descrip
+        </label>
+
+        <input type="text" id="descrip" name="descrip" placeholder="Descrip" class="form-control" value="<%= @brewery.descrip %>">
+      </div>
+
+      <!-- Label and input for db_api_brewery_id -->
+      <div class="form-group">
+        <label for="db_api_brewery_id" class="control-label">
+          Db api brewery
+        </label>
+
+        <input type="text" id="db_api_brewery_id" name="db_api_brewery_id" placeholder="Db api brewery" class="form-control" value="<%= @brewery.db_api_brewery_id %>">
+      </div>
+
+      <!-- Label and input for type -->
+      <div class="form-group">
+        <label for="type" class="control-label">
+          Type
+        </label>
+
+        <input type="text" id="type" name="type" placeholder="Type" class="form-control" value="<%= @brewery.type %>">
+      </div>
+
+      <!-- Label and input for est -->
+      <div class="form-group">
+        <label for="est" class="control-label">
+          Est
+        </label>
+
+        <input type="text" id="est" name="est" placeholder="Est" class="form-control" value="<%= @brewery.est %>">
+      </div>
+
+      <!-- Label and input for website -->
+      <div class="form-group">
+        <label for="website" class="control-label">
+          Website
+        </label>
+
+        <input type="text" id="website" name="website" placeholder="Website" class="form-control" value="<%= @brewery.website %>">
+      </div>
+
+      <!-- Label and input for street_add -->
+      <div class="form-group">
+        <label for="street_add" class="control-label">
+          Street add
+        </label>
+
+        <input type="text" id="street_add" name="street_add" placeholder="Street add" class="form-control" value="<%= @brewery.street_add %>">
+      </div>
+
+      <!-- Label and input for locality -->
+      <div class="form-group">
+        <label for="locality" class="control-label">
+          Locality
+        </label>
+
+        <input type="text" id="locality" name="locality" placeholder="Locality" class="form-control" value="<%= @brewery.locality %>">
+      </div>
+
+      <!-- Label and input for region -->
+      <div class="form-group">
+        <label for="region" class="control-label">
+          Region
+        </label>
+
+        <input type="text" id="region" name="region" placeholder="Region" class="form-control" value="<%= @brewery.region %>">
+      </div>
+
+      <!-- Label and input for zip_code -->
+      <div class="form-group">
+        <label for="zip_code" class="control-label">
+          Zip code
+        </label>
+
+        <input type="text" id="zip_code" name="zip_code" placeholder="Zip code" class="form-control" value="<%= @brewery.zip_code %>">
+      </div>
+
+      <!-- Label and input for phone -->
+      <div class="form-group">
+        <label for="phone" class="control-label">
+          Phone
+        </label>
+
+        <input type="text" id="phone" name="phone" placeholder="Phone" class="form-control" value="<%= @brewery.phone %>">
+      </div>
+
+      <!-- Label and input for lat -->
+      <div class="form-group">
+        <label for="lat" class="control-label">
+          Lat
+        </label>
+
+        <input type="text" id="lat" name="lat" placeholder="Lat" class="form-control" value="<%= @brewery.lat %>">
+      </div>
+
+      <!-- Label and input for long -->
+      <div class="form-group">
+        <label for="long" class="control-label">
+          Long
+        </label>
+
+        <input type="text" id="long" name="long" placeholder="Long" class="form-control" value="<%= @brewery.long %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Brewery
+      </button>
+      or
+      <a href="/breweries/<%= @brewery.id %>">Cancel</a>
+    </form>
+  </div>
+</div>

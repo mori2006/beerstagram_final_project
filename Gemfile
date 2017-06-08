@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem "starter_generators", :git => "https://github.com/raghubetina/starter_generators"
+gem "devise"
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"

@@ -1,0 +1,54 @@
+<div class="page-header">
+  <h1>
+    Breweries
+    <a href="/breweries/new" class="btn btn-lg btn-success">New Brewery</a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Name</th>
+        <th>Image</th>
+        <th>Descrip</th>
+        <th>Db api brewery</th>
+        <th>Type</th>
+        <th>Est</th>
+        <th>Website</th>
+        <th>Street add</th>
+        <th>Locality</th>
+        <th>Region</th>
+        <th>Zip code</th>
+        <th>Phone</th>
+        <th>Lat</th>
+        <th>Long</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @breweries.each do |brewery| %>
+      <tr>
+        <td><%= brewery.name %></td>
+        <td><%= brewery.image %></td>
+        <td><%= brewery.descrip %></td>
+        <td><%= brewery.db_api_brewery_id %></td>
+        <td><%= brewery.type %></td>
+        <td><%= brewery.est %></td>
+        <td><%= brewery.website %></td>
+        <td><%= brewery.street_add %></td>
+        <td><%= brewery.locality %></td>
+        <td><%= brewery.region %></td>
+        <td><%= brewery.zip_code %></td>
+        <td><%= brewery.phone %></td>
+        <td><%= brewery.lat %></td>
+        <td><%= brewery.long %></td>
+        <td>
+          <a href="/breweries/<%= brewery.id %>" class="btn btn-primary">Show</a>
+          <a href="/breweries/<%= brewery.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_brewery/<%= brewery.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
