@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   # DELETE
   get "/delete_brewery/:id", :controller => "breweries", :action => "destroy"
+
+  # SEARCH
+  get "/brewery/find_brewery", :controller => "breweries", :action => "find_brewery"
+
   #------------------------------
 
   # Routes for the Comment resource:
@@ -75,4 +79,8 @@ Rails.application.routes.draw do
 
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  get "/users/:id", :controller => "users", :action => "show"
+  get "/my_likes", :controller => "users", :action => "my_likes"
+
 end

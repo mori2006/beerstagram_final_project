@@ -13,6 +13,26 @@ class BreweriesController < ApplicationController
 
   def new
     @brewery = Brewery.new
+    @search_name = params[:name]
+
+    url = "http://api.brewerydb.com/v2/breweries?name="+@search_name+"&key=e040b6aa2790deb35c1c03d2322d373b"
+
+    parsed_data = JSON.parse(open(url).read)
+
+    if parsed_data["data"] != nil
+
+      @search_result_brewery_name = parsed_data["data"][0]["name"]
+      @search_result_db_brewery_id = parsed_data["data"][0]["id"]
+      @search_result_brewery_website = parsed_data["data"][0]["website"]
+      @search_result_brewery_descrip = parsed_data["data"][0]["description"]
+      @search_result_brewery_est = parsed_data["data"][0]["established"]
+      if parsed_data["data"][0]["images"] != nil
+        @search_result_brewery_image = parsed_data["data"][0]["images"]["medium"]
+      else
+      end
+
+    else
+    end
 
     render("breweries/new.html.erb")
   end
@@ -88,4 +108,10 @@ class BreweriesController < ApplicationController
       redirect_to(:back, :notice => "Brewery deleted.")
     end
   end
+
+  def find_brewery
+
+    render("breweries/find_brewery_form.html.erb")
+  end
+
 end

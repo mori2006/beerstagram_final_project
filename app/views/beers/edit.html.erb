@@ -1,15 +1,16 @@
 <!-- Validation failure messages -->
 <% if @beer.errors.any? %>
-  <% @beer.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @beer.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
+
 <div class="page-header">
-  <h3>Edit Beer #<%= @beer.id %></h3>
+  <h3>Edit <%= @beer.name %></h3>
 </div>
 
 <div class="row">
@@ -42,16 +43,16 @@
           User
         </label>
 
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @beer.user_id %>">
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @beer.user_id %>">
       </div>
 
       <!-- Label and input for brewed_by -->
       <div class="form-group">
-        <label for="brewed_by" class="control-label">
+        <label for="brewery_id" class="control-label">
           Brewed by
         </label>
 
-        <textarea id="brewed_by" name="brewed_by" placeholder="Brewed by" class="form-control" rows="3"><%= @beer.brewed_by %></textarea>
+        <%= select_tag(:brewery_id, options_from_collection_for_select(Brewery.all, :id, :name, @beer.brewery_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for style -->
@@ -105,10 +106,11 @@
           Rating
         </label>
 
-        <input type="text" id="rating" name="rating" placeholder="Rating" class="form-control" value="<%= @beer.rating %>">
+        <%= select_tag(:rating, options_for_select(1..5,@beer.rating), :class => "form-control") %>
+
       </div>
 
-      <button class="btn btn-warning">
+      <button class="btn btn-warning" type="submit">
         Update Beer
       </button>
       or

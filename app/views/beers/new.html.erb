@@ -1,14 +1,16 @@
 <!-- Validation failure messages -->
 <% if @beer.errors.any? %>
-  <% @beer.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @beer.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
 <% if @search_result_db_beer_id != nil %>
+<% if Brewery.where(:name => @search_result_brewery)[0] != nil %>
+
 
 <div class="page-header">
   <h3>Add Beer</h3>
@@ -46,11 +48,13 @@
 
       <!-- Label and input for brewed_by -->
       <div class="form-group">
-        <label for="brewed_by" class="control-label">
+        <label for="brewery_id" class="control-label">
           Brewed by
         </label>
 
-        <textarea id="brewed_by" name="brewed_by" placeholder="Brewed by" class="form-control" rows="3"><%= @search_result_brewery %></textarea>
+
+        <%= select_tag(:brewery_id, options_from_collection_for_select(Brewery.all, :id, :name, Brewery.where(:name => @search_result_brewery).ids[0]), :class => "form-control") %>
+
       </div>
 
       <!-- Label and input for style -->
@@ -59,7 +63,7 @@
           Style
         </label>
 
-        <textarea id="style" name="style" placeholder="Style" class="form-control" rows="3"><%= @search_result_style %></textarea>
+        <input type="text" id="style" name="style" placeholder="Style" class="form-control" value="<%= @search_result_style %>">
       </div>
 
       <!-- Label and input for descrip -->
@@ -104,7 +108,7 @@
           Rating
         </label>
 
-        <input type="text" id="rating" name="rating" placeholder="Rating" class="form-control" value="<%= @beer.rating %>">
+        <%= select_tag(:rating, options_for_select(1..5), :class => "form-control") %>
       </div>
 
       <button class="btn btn-success">
@@ -115,7 +119,192 @@
     </form>
   </div>
 </div>
-
 <% else %>
 
+<div class="page-header">
+  <h3><%= @search_result_beer_name %> was found in the API Database but it's brewery, <%= @search_result_brewery %>, is not in our system. Please add <%= @search_result_brewery %> before proceeding.</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_brewery" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <textarea id="name" name="name" placeholder="Name" class="form-control" rows="3"><%= @search_result_brewery %></textarea>
+      </div>
+
+      <!-- Label and input for image -->
+      <div class="form-group">
+        <label for="image" class="control-label">
+          Image
+        </label>
+
+        <input type="text" id="image" name="image" placeholder="Image" class="form-control" value="<%= @search_result_brewery_image %>">
+      </div>
+
+      <!-- Label and input for descrip -->
+      <div class="form-group">
+        <label for="descrip" class="control-label">
+          Descrip
+        </label>
+
+        <input type="text" id="descrip" name="descrip" placeholder="Descrip" class="form-control" value="<%= @search_result_brewery_descrip %>">
+      </div>
+
+      <!-- Label and input for db_api_brewery_id -->
+      <div class="form-group">
+        <label for="db_api_brewery_id" class="control-label">
+          Db api brewery
+        </label>
+
+        <input type="text" id="db_api_brewery_id" name="db_api_brewery_id" placeholder="Db api brewery" class="form-control" value="<%= @search_result_db_brewery_id %>">
+      </div>
+
+      <!-- Label and input for est -->
+      <div class="form-group">
+        <label for="est" class="control-label">
+          Est
+        </label>
+
+        <input type="text" id="est" name="est" placeholder="Est" class="form-control" value="<%= @search_result_brewery_est %>">
+      </div>
+
+      <!-- Label and input for website -->
+      <div class="form-group">
+        <label for="website" class="control-label">
+          Website
+        </label>
+
+        <input type="text" id="website" name="website" placeholder="Website" class="form-control" value="<%= @search_result_brewery_website %>">
+      </div>
+
+      <button class="btn btn-success">
+        Save Brewery
+      </button>
+      or
+      <a href="/breweries">Cancel</a>
+    </form>
+  </div>
+</div>
+
+<% end %>
+
+<% else %>
+<div class="page-header">
+  <h3>Beer Not Found in API Database. Please fill out information below manually to add Beer</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_beer" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <textarea id="name" name="name" placeholder="Name" class="form-control" rows="3"><%= @search_name %></textarea>
+      </div>
+
+      <!-- Label and input for image -->
+      <div class="form-group">
+        <label for="image" class="control-label">
+          Image
+        </label>
+
+        <input type="text" id="image" name="image" placeholder="Image" class="form-control" value="<%= @beer.image %>">
+      </div>
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= current_user.id %>">
+      </div>
+
+      <!-- Label and input for brewed_by -->
+      <div class="form-group">
+        <label for="brewery_id" class="control-label">
+          Brewed by
+        </label>
+
+
+        <%= select_tag(:brewery_id, options_from_collection_for_select(Brewery.all, :id, :name, @beer.brewed_by), :class => "form-control") %>
+        <p class="help-block">
+          <a href="/brewery/find_brewery">or add a new brewery</a>
+        </p>
+      </div>
+
+
+      <!-- Label and input for style -->
+      <div class="form-group">
+        <label for="style" class="control-label">
+          Style
+        </label>
+
+        <input type="text" id="style" name="style" placeholder="Style" class="form-control" value="<%= @beer.style %>">
+      </div>
+
+      <!-- Label and input for descrip -->
+      <div class="form-group">
+        <label for="descrip" class="control-label">
+          Descrip
+        </label>
+
+        <input type="text" id="descrip" name="descrip" placeholder="Descrip" class="form-control" value="<%= @beer.descrip %>">
+      </div>
+
+      <!-- Label and input for abv -->
+      <div class="form-group">
+        <label for="abv" class="control-label">
+          Abv
+        </label>
+
+        <input type="text" id="abv" name="abv" placeholder="Abv" class="form-control" value="<%= @beer.abv %>">
+      </div>
+
+      <!-- Label and input for db_api_beer_id -->
+      <div class="form-group">
+        <label for="db_api_beer_id" class="control-label">
+          Db api beer
+        </label>
+
+        <input type="text" id="db_api_beer_id" name="db_api_beer_id" placeholder="Db api beer" class="form-control" value="<%= @beer.db_api_beer_id %>">
+      </div>
+
+      <!-- Label and input for avail -->
+      <div class="form-group">
+        <label for="avail" class="control-label">
+          Avail
+        </label>
+
+        <input type="text" id="avail" name="avail" placeholder="Avail" class="form-control" value="<%= @beer.avail %>">
+      </div>
+
+      <!-- Label and input for rating -->
+      <div class="form-group">
+        <label for="rating" class="control-label">
+          Rating
+        </label>
+
+        <%= select_tag(:rating, options_for_select(1..5), :class => "form-control") %>
+      </div>
+
+      <button class="btn btn-success">
+        Save Beer
+      </button>
+      or
+      <a href="/beers">Cancel</a>
+    </form>
+  </div>
+</div>
 <% end %>

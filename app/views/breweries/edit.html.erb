@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Edit Brewery #<%= @brewery.id %></h3>
+  <h3>Edit <%= @brewery.name %></h3>
 </div>
 
 <div class="row">
@@ -54,14 +54,6 @@
         <input type="text" id="db_api_brewery_id" name="db_api_brewery_id" placeholder="Db api brewery" class="form-control" value="<%= @brewery.db_api_brewery_id %>">
       </div>
 
-      <!-- Label and input for type -->
-      <div class="form-group">
-        <label for="type" class="control-label">
-          Type
-        </label>
-
-        <input type="text" id="type" name="type" placeholder="Type" class="form-control" value="<%= @brewery.type %>">
-      </div>
 
       <!-- Label and input for est -->
       <div class="form-group">
@@ -79,69 +71,6 @@
         </label>
 
         <input type="text" id="website" name="website" placeholder="Website" class="form-control" value="<%= @brewery.website %>">
-      </div>
-
-      <!-- Label and input for street_add -->
-      <div class="form-group">
-        <label for="street_add" class="control-label">
-          Street add
-        </label>
-
-        <input type="text" id="street_add" name="street_add" placeholder="Street add" class="form-control" value="<%= @brewery.street_add %>">
-      </div>
-
-      <!-- Label and input for locality -->
-      <div class="form-group">
-        <label for="locality" class="control-label">
-          Locality
-        </label>
-
-        <input type="text" id="locality" name="locality" placeholder="Locality" class="form-control" value="<%= @brewery.locality %>">
-      </div>
-
-      <!-- Label and input for region -->
-      <div class="form-group">
-        <label for="region" class="control-label">
-          Region
-        </label>
-
-        <input type="text" id="region" name="region" placeholder="Region" class="form-control" value="<%= @brewery.region %>">
-      </div>
-
-      <!-- Label and input for zip_code -->
-      <div class="form-group">
-        <label for="zip_code" class="control-label">
-          Zip code
-        </label>
-
-        <input type="text" id="zip_code" name="zip_code" placeholder="Zip code" class="form-control" value="<%= @brewery.zip_code %>">
-      </div>
-
-      <!-- Label and input for phone -->
-      <div class="form-group">
-        <label for="phone" class="control-label">
-          Phone
-        </label>
-
-        <input type="text" id="phone" name="phone" placeholder="Phone" class="form-control" value="<%= @brewery.phone %>">
-      </div>
-
-      <!-- Label and input for lat -->
-      <div class="form-group">
-        <label for="lat" class="control-label">
-          Lat
-        </label>
-
-        <input type="text" id="lat" name="lat" placeholder="Lat" class="form-control" value="<%= @brewery.lat %>">
-      </div>
-
-      <!-- Label and input for long -->
-      <div class="form-group">
-        <label for="long" class="control-label">
-          Long
-        </label>
-
-        <input type="text" id="long" name="long" placeholder="Long" class="form-control" value="<%= @brewery.long %>">
       </div>
 
       <button class="btn btn-warning">

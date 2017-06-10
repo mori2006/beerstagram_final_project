@@ -39,43 +39,45 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <% if current_user != nil %>
         <ul class="nav navbar-nav">
-          <li><a href="/breweries">Breweries</a></li>
-          <li><a href="/comments">Comments</a></li>
-          <li><a href="/likes">Likes</a></li>
-          <li><a href="/beers">Beers</a></li>
-          <li><a href="/rails/info">Sitemap</a></li>
+          <li><a href="/breweries">All Breweries</a></li>
+          <li><a href="/beers"><i class="fa fa-beer"></i> All Beers</a></li>
+          <!-- <li><a href="/comments">Comments</a></li> -->
+          <li><a href="/my_likes"><i class="fa fa-fw fa-heart"></i> My Likes</a></li>
+          <li><a href="/users/<%= current_user.id %>"><i class="fa fa-fw fa-user"></i> My Beers</a></li>
+          <!-- <li><a href="/rails/info">Sitemap</a></li> -->
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <% if current_user != nil %>
-          <li><a href="/users/edit"> Edit <%= current_user.username %> profile</a></li>
+          <li><a href="/users/edit"><i class="fa fa-pencil-square-o"></i> Edit <%= current_user.username %> profile</a></li>
           <li><a href="/users/sign_out" data-method="delete" rel="nofollow"> <i class="fa fa-fw fa-sign-out"></i>Sign Out</a></li>
           <% else %>
-          <li><a href="/users/sign_in"> Sign In </a></li>
-          <li><a href="/users/sign_up"> Sign Up </a></li>
-          <% end %>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div>
-  </nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/users/sign_in"> Sign In </a></li>
+            <li><a href="/users/sign_up"> Sign Up </a></li>
+            <% end %>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
 
-  <div class="container">
-    <% if notice.present? %>
-    <div class="alert alert-dismissable alert-success">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= notice %>
-    </div>
-    <% end %>
+    <div class="container">
+      <% if notice.present? %>
+      <div class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= notice %>
+      </div>
+      <% end %>
 
-    <% if alert.present? %>
-    <div class="alert alert-dismissable alert-warning">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= alert %>
-    </div>
-    <% end %>
+      <% if alert.present? %>
+      <div class="alert alert-dismissable alert-warning">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= alert %>
+      </div>
+      <% end %>
 
-    <%= yield %>
-  </div>
-</body>
-</html>
+      <%= yield %>
+    </div>
+  </body>
+  </html>

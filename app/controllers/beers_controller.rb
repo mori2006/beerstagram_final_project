@@ -51,16 +51,6 @@ class BeersController < ApplicationController
       @search_result_db_brewery_id = parsed_data["data"][0]["breweries"][0]["id"]
       # @search_result_brewery_type =
       @search_result_brewery_est = parsed_data["data"][0]["breweries"][0]["established"]
-      if parsed_data["data"][0]["breweries"][0]["locations"] != nil
-        @search_result_brewery_street_add = parsed_data["data"][0]["breweries"][0]["locations"][0]["streetAddress"]
-        @search_result_brewery_locality = parsed_data["data"][0]["breweries"][0]["locations"][0]["locality"]
-        @search_result_brewery_region = parsed_data["data"][0]["breweries"][0]["locations"][0]["region"]
-        @search_result_brewery_zip_code = parsed_data["data"][0]["breweries"][0]["locations"][0]["postalCode"]
-        @search_result_brewery_phone = parsed_data["data"][0]["breweries"][0]["locations"][0]["phone"]
-        @search_result_brewery_lat = parsed_data["data"][0]["breweries"][0]["locations"][0]["latitude"]
-        @search_result_brewery_long = parsed_data["data"][0]["breweries"][0]["locations"][0]["longitude"]
-      else
-      end
     else
     end
 
@@ -80,6 +70,7 @@ class BeersController < ApplicationController
     @beer.db_api_beer_id = params[:db_api_beer_id]
     @beer.avail = params[:avail]
     @beer.rating = params[:rating]
+    @beer.brewery_id = params[:brewery_id]
 
     save_status = @beer.save
 
@@ -109,6 +100,7 @@ class BeersController < ApplicationController
     @beer.db_api_beer_id = params[:db_api_beer_id]
     @beer.avail = params[:avail]
     @beer.rating = params[:rating]
+    @beer.brewery_id = params[:brewery_id]
 
     save_status = @beer.save
 

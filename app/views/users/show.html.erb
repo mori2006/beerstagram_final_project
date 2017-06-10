@@ -1,0 +1,64 @@
+<div class="page-header">
+  <h3><%= @user.username %>'s Beers</h3>
+  <h4>
+    <a href="/beer/find_beer" class="btn btn-lg btn-success">Search for New Beer</a>
+  </h4>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>User</th>
+        <th>Brewed by</th>
+        <th>Style</th>
+        <th>Descrip</th>
+        <th>Abv</th>
+        <th>Avail</th>
+        <th>Rating</th>
+        <th>Actions</th>
+      </tr>
+
+
+      <% @beers.each do |beer| %>
+      <% if current_user.id == beer.user_id %>
+      <tr>
+        <td><img src ="<%= beer.image %>"></td>
+        <td><%= beer.name %></td>
+        <td><%= beer.user.username %></td>
+        <td><a href="/breweries/<%= beer.brewery.id %>"> <%= beer.brewery.name %> </a></td>
+        <td><%= beer.style %></td>
+        <td><%= beer.descrip %></td>
+        <td><%= beer.abv %>%</td>
+        <td><%= beer.avail %></td>
+        <td><%= beer.rating %></td>
+        <td>
+          <a href="/beers/<%= beer.id %>" class="btn btn-primary">Show</a>
+          <a href="/beers/<%= beer.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_beer/<%= beer.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% else %>
+      <tr>
+        <td><img src ="<%= beer.image %>"></td>
+        <td><%= beer.name %></td>
+        <td><%= beer.user.username %></td>
+        <td><a href="/breweries/<%= beer.brewery.id %>"> <%= beer.brewery.name %> </a></td>
+        <td><%= beer.style %></td>
+        <td><%= beer.descrip %></td>
+        <td><%= beer.abv %>%</td>
+        <td><%= beer.avail %></td>
+        <td><%= beer.rating %></td>
+        <td>
+          <a href="/beers/<%= beer.id %>" class="btn btn-primary">Show</a>
+        </td>
+      </tr>
+      <% end %>
+
+      <% end %>
+    </table>
+  </div>
+</div>

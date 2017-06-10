@@ -1,51 +1,24 @@
 <div class="page-header">
-  <h3>Brewery #<%= @brewery.id %></h3>
+  <h3><%= @brewery.name %></h3>
 </div>
 
 <div class="row">
   <div class="col-md-12 mb-2">
+    <img src="<%= @brewery.image %>" class="img-responsive">
     <dl class="dl-horizontal">
-      <dt>Name</dt>
-      <dd><%= @brewery.name %></dd>
 
-      <dt>Image</dt>
-      <dd><%= @brewery.image %></dd>
-
-      <dt>Descrip</dt>
+      <dt>Description</dt>
       <dd><%= @brewery.descrip %></dd>
 
-      <dt>Db api brewery</dt>
-      <dd><%= @brewery.db_api_brewery_id %></dd>
-
-      <dt>Type</dt>
-      <dd><%= @brewery.type %></dd>
+      <!-- <dt>Db api brewery</dt>
+      <dd><%= @brewery.db_api_brewery_id %></dd> -->
 
       <dt>Est</dt>
       <dd><%= @brewery.est %></dd>
 
       <dt>Website</dt>
-      <dd><%= @brewery.website %></dd>
+      <dd><a href="<%= @brewery.website %>"><%= @brewery.website %></a></dd>
 
-      <dt>Street add</dt>
-      <dd><%= @brewery.street_add %></dd>
-
-      <dt>Locality</dt>
-      <dd><%= @brewery.locality %></dd>
-
-      <dt>Region</dt>
-      <dd><%= @brewery.region %></dd>
-
-      <dt>Zip code</dt>
-      <dd><%= @brewery.zip_code %></dd>
-
-      <dt>Phone</dt>
-      <dd><%= @brewery.phone %></dd>
-
-      <dt>Lat</dt>
-      <dd><%= @brewery.lat %></dd>
-
-      <dt>Long</dt>
-      <dd><%= @brewery.long %></dd>
 
     </dl>
 
@@ -56,9 +29,15 @@
       <a href="/breweries/<%= @brewery.id %>/edit" class="btn btn-warning">
         Edit
       </a>
-      <a href="/delete_brewery/<%= @brewery.id %>" class="btn btn-danger" rel="nofollow">
+      <!-- <a href="/delete_brewery/<%= @brewery.id %>" class="btn btn-danger" rel="nofollow">
         Delete
-      </a>
+      </a> -->
     </div>
   </div>
 </div>
+
+<ul>
+  <% @brewery.beers.each do |beer| %>
+  <li><a href ="/beers/<%= beer.id %>"><%= beer.name %></a></li>
+  <% end %>
+</ul>
